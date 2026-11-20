@@ -127,6 +127,39 @@
         @enderror
     </div>
 
+
+    <div class="col-md-6">
+        <label>Gambar Produk</label>
+
+        <input
+            type="file"
+            name="image"
+            class="form-control"
+            accept="image/*"
+        >
+
+        <small class="text-secondary">
+            Format: JPG, PNG, GIF. Max 5MB.
+        </small>
+
+        @error('image')
+            <div>
+                <small class="text-danger">{{ $message }}</small>
+            </div>
+        @enderror
+
+        @if(isset($product) && $product->image)
+            <div style="margin-top: 10px;">
+                <img
+                    src="{{ asset('storage/' . $product->image) }}"
+                    alt="Gambar Produk"
+                    style="max-width: 200px; max-height: 200px;"
+                >
+            </div>
+        @endif
+
+    </div>
+
 </div>
 
 

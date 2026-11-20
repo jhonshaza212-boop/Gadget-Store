@@ -47,7 +47,7 @@
 
                 <td>{{ $category->name }}</td>
 
-                <td>{{ $category->description ?? '-' }}</td>
+                <td>{{ $category->descripte ?? '-' }}</td>
 
                 <td>{{ $category->products_count }}</td>
 

@@ -8,20 +8,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Product extends Model
 {
     protected $fillable = [
-    'category_id', 'product_code', 'name', 'brand',
-    'price', 'stock', 'description',
+        'category_id', 'product_code', 'name', 'brand',
+        'price', 'stock', 'description', 'image',
     ];
-    
+
     protected function casts(): array
     {
         return [
-        'price' => 'decimal:2',
-        'stock' => 'integer',
+            'price' => 'decimal:2',
+            'stock' => 'integer',
         ];
     }
 
     public function category(): BelongsTo
     {
-    return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class);
     }
 }

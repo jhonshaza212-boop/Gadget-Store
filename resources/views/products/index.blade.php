@@ -40,6 +40,7 @@
 
     <thead>
         <tr>
+            <th>Gambar</th>
             <th>Kode</th>
             <th>Produk</th>
             <th>Kategori</th>
@@ -55,22 +56,24 @@
         @forelse($products as $product)
 
             <tr>
-                <td>{{ $product->product_code }}</td>
-
-                <td>{{ $product->name }}</td>
-
-                <td>{{ $product->category->name }}</td>
-
-                <td>{{ $product->brand }}</td>
-
                 <td>
-                    Rp {{ number_format((float)$product->price, 0, ',', '.') }}
+                    @if($product->image)
+                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="rounded" style="width: 48px; height: 48px; object-fit: cover;">
+                    @else
+                        <div class="bg-light text-secondary rounded d-flex align-items-center justify-content-center" style="width: 48px; height: 48px; font-size: 11px;">
+                            No Img
+                        </div>
+                    @endif
                 </td>
 
+                <td>{{ $product->product_code }}</td>
+                <td>{{ $product->name }}</td>
+                <td>{{ $product->category->name }}</td>
+                <td>{{ $product->brand }}</td>
+                <td>Rp {{ number_format((float) $product->price, 0, ',', '.') }}</td>
                 <td>{{ $product->stock }}</td>
 
-                <td>
-
+                <td class="text-nowrap">
                     <a
                         href="{{ route('products.edit', $product) }}"
                         class="btn btn-warning btn-sm"
@@ -81,12 +84,16 @@
                     <form
                         method="POST"
                         action="{{ route('products.destroy', $product) }}"
-                        style="display:inline;"
+                        class="d-inline"
                     >
                         @csrf
                         @method('DELETE')
 
-                        <button type="submit" class="btn btn-danger btn-sm">
+                        <button
+                            type="submit"
+                            class="btn btn-danger btn-sm"
+                            onclick="return confirm('Yakin ingin menghapus produk ini?')"
+                        >
                             Hapus
                         </button>
                     </form>
@@ -97,7 +104,7 @@
         @empty
 
             <tr>
-                <td colspan="7">
+                <td colspan="8">
                     Belum ada produk.
                 </td>
             </tr>

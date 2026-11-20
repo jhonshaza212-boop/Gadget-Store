@@ -42,10 +42,7 @@ class CategoryController extends Controller
                 'nullable',
                 'string',
             ],
-            'status' => [
-                'required',
-                'in:aktif,tidak aktif',
-            ],
+
         ]);
 
         Category::create($validated);
@@ -92,6 +89,7 @@ class CategoryController extends Controller
                 'required',
                 'in:aktif,tidak aktif',
             ],
+
         ]);
 
         $category->update([
